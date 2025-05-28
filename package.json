@@ -1,0 +1,38 @@
+{
+  "name": "bot-discord",
+  "version": "1.0.0",
+   "description": "Bot automatizado para servidores de GTA RP via Discord.",
+   "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon src/index.js",
+    "instalar": "powershell -ExecutionPolicy Bypass -File instalar.ps1"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "gta-rp",
+    "registro",
+    "jmdev"
+  ],
+  "author": {
+    "name": "Miguel Almeida - DEV",
+    "email": "jmalmeida700@gmail.com",
+    "url": "https://github.com/JoaoAlmeid"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JoaoAlmeid/Bot_Discord.git"
+  },
+  "bugs": {
+    "url": "https://github.com/JoaoAlmeid/Bot_Discord/issues"
+  },
+  "homepage": "https://github.com/JoaoAlmeid/Bot_Discord#readme",
+  "dependencies": {
+    "discord.js": "^14.19.3",
+    "dotenv": "^16.5.0",
+    "fs": "^0.0.1-security",
+    "nodemon": "^3.0.1"
+  }
+}
