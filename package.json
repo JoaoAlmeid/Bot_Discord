@@ -5,15 +5,18 @@
    "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon src/index.js",
+    "start": "pm2 start pm2.config.js",
+    "list": "pm2 list",
+    "logs": "pm2 logs bot",
+    "stop": "pm2 stop bot",
+    "restart": "pm2 restart bot",
+    "remove": "pm2 remove bot",
     "instalar": "powershell -ExecutionPolicy Bypass -File instalar.ps1"
   },
   "keywords": [
     "discord",
     "bot",
-    "gta-rp",
-    "registro",
-    "jmdev"
+    "gta-rp"
   ],
   "author": {
     "name": "Miguel Almeida - DEV",
