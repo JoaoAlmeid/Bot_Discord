@@ -1,5 +1,6 @@
 import { client } from "../../Uteis/cliente.js";
 import { abreviacoesMenores } from "../../Uteis/abreviacoes.js";
+import 'dotenv/config';
 
 client.on("messageReactionAdd", async (reaction, user) => {
     try {
@@ -8,14 +9,14 @@ client.on("messageReactionAdd", async (reaction, user) => {
 
         const { message } = reaction;
 
-        const canaisPermitidos = ["1376944516157804616"];
+        const canaisPermitidos = [process.env.ID_CANAL_RECRUTAMENTO];
         if (!canaisPermitidos.includes(message.channel.id)) return;
         if (reaction.emoji.name !== "✅") return;
 
         const guild = message.guild;
         const membroAprovador = await guild.members.fetch(user.id);
 
-        const cargosAutorizados = ["SET", "Prefeitura"];
+        const cargosAutorizados = [process.env.ID_CARGO_SET, process.env.ID_CARGO_PREFEITURA];
         const temPermissao = membroAprovador.roles.cache.some(role =>
             cargosAutorizados.includes(role.name)
         );
@@ -59,8 +60,7 @@ client.on("messageReactionAdd", async (reaction, user) => {
         if (!cargoPatente) return message.reply("❌ Cargo de patente não encontrado.");
 
         // Buscar o cargo geral 'policia'
-        const cargoPolicia = guild.roles.cache.find(r => limparNomeCargo(r.name) === "policia");
-
+        const cargoPolicia = guild.roles.cache.get(process.env.ID_CARGO_POLICIA);
         if (!cargoPolicia) {
             return message.reply("❌ Cargo geral 'policia' não encontrado.");
         }
@@ -68,18 +68,7 @@ client.on("messageReactionAdd", async (reaction, user) => {
         // Adiciona todos os cargos juntos
         await membroRegistrado.roles.add([cargoDepartamento, cargoPatente, cargoPolicia]);
 
-        const normalizar = (texto) => texto.trim().toLowerCase().replace(/\s+/g, "");
-
-        let nomePatenteParaSigla;
-        if (idPatente) {
-            const role = guild.roles.cache.get(idPatente);
-            nomePatenteParaSigla = role ? role.name : "";
-        } else {
-            nomePatenteParaSigla = limparNomeCargo(patenteNome);
-        }
-
-        const patenteNormalizada = normalizar(nomePatenteParaSigla);
-        const sigla = abreviacoesMenores[patenteNormalizada] || "JM";
+        const sigla = abreviacoesMenores[cargoPatente.id] || "CRIA-RJ";
 
         const novoNick = `${sigla} ${qra} #${passaporte}`;
         await membroRegistrado.setNickname(novoNick).catch(err => {

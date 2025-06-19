@@ -46,8 +46,8 @@ export const abreviacoesCargos = {
 
 
 export const abreviacoesMenores = {
-    "aluno": "[ALN]",
-    "acadepol": "[ACDP]",
-    "cadete": "[CAD]",
-    "recruta": "[REC]"
+    "1384738832951410758": "[ALN]", // Aluno - PMERJ
+    "1384738939310706819": "[ACDP]", // Acadepol - CORE
+    "1384738904439001220": "[ACDP]", // Acadepol - CIVIL
+    "1384738987482284142": "[CAD]" // Cadete - PRF
 }
